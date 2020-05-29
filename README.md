@@ -6,6 +6,8 @@ A repo to track ML research for LobbyView.
 
 ### 29 May
 
+#### Part One
+
 The current repo consists of `model.py` and data `data/data.npy`. `data` is a numpy array of shape `20_000 x 127`, where each row corresponds to one issue / for-against relation.
 
 The 127-length vector *t* can be broken down as follows:
@@ -21,3 +23,23 @@ The 127-length vector *t* can be broken down as follows:
 8. t[92:] == a one-hot containing the committee information of this bill
 
 As of today, it is not normalized.
+
+#### Part Two
+
+Data was normalized by the following script:
+
+```
+maxes = data.max(axis=0)
+mins = data.min(axis=0)
+
+data -= mins
+maxes -= mins
+
+data /= maxes
+
+norm_data = np.nan_to_num(data)
+```
+
+and is now saved to `data/norm_data.npy`.
+
+
